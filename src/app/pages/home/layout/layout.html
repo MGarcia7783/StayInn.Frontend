@@ -1,0 +1,70 @@
+<div clas="contenedor-principal">
+  <!--BARRA DE NAVEGACION-->
+  <nav class="barra-navegacion">
+    <div class="navbar-contenido">
+      <div class="logotipo">
+        <span class="texto-logo">{{ hotel()?.nombre }}</span>
+      </div>
+
+      <!--Enlaces de navegación-->
+      <div class="menu-escritorio">
+        @for (link of enlaces; track link.etiqueta) {
+          <a (click)="navegar(link.ruta)" class="enlace-nav" style="cursor: pointer">{{
+            link.etiqueta
+          }}</a>
+        }
+      </div>
+
+      <div class="perfil-nav-movil">
+        <button class="boton-acceso-movil">Iniciar Sesión</button>
+      </div>
+
+      <!--Menu movil / Boton hamburguesa-->
+      <button class="boton-hamburguesa" (click)="alternarMenuMovil()">
+        @if (!esMenuMovil()) {
+          <i class="fa-solid fa-bars"></i>
+        } @else {
+          <i class="fa-solid fa-xmark"></i>
+        }
+      </button>
+    </div>
+
+    <!--Menu desplegable movil-->
+    @if (esMenuMovil()) {
+      <div class="menu-movil-desplegable">
+        @for (link of enlaces; track link.etiqueta) {
+          <a (click)="navegar(link.ruta)"class="enlace-nav-movil" style="cursor: pointer">{{
+            link.etiqueta
+          }}</a>
+        }
+      </div>
+    }
+  </nav>
+
+  <!--Contenido dinámico-->
+  <main class="cuerpo-layout">
+    <router-outlet></router-outlet>
+
+    <!--PIE DE PAGINA-->
+    <footer class="pie-pagina">
+      <div class="footer-grid">
+        <div class="footer-columna">
+          <div class="footer-logo">{{ hotel()?.nombre }}</div>
+          <p class="footer-texto">Contacto: {{ hotel()?.email }}</p>
+          <p class="footer-texto">Teléfono: {{ hotel()?.telefono }}</p>
+        </div>
+
+        <div class="footer-redes">
+          <a href="https://instagram.com" target="_blank" class="red-icono">
+            <i class="fa-brands fa-instagram"></i> Instagram
+          </a>
+          <a href="https://facebook.com" target="_blank" class="red-icono">
+            <i class="fa-brands fa-facebook"></i> Facebook
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-copy">© 2026 {{ hotel()?.nombre }}. Todos los derechos reservados.</div>
+    </footer>
+  </main>
+</div>

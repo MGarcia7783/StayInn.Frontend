@@ -1,0 +1,294 @@
+.contenedor-principal {
+  font-family: var(--fuente);
+  color: var(--texto);
+  line-height: 1.6;
+
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* --- BARRA NAVEGACIÓN --- */
+.barra-navegacion {
+  position: sticky;
+  top: 0;
+  background: #ffffff;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.navbar-contenido {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 80px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logotipo {
+  display: flex;
+  flex-direction: column;
+}
+
+.texto-logo {
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--texto);
+  letter-spacing: -1px;
+}
+
+.menu-escritorio {
+  display: none;
+  gap: 30px;
+  align-items: center;
+}
+
+.enlace-nav {
+  text-decoration: none;
+  color: var(--texto);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  transition: color 0.3s;
+}
+
+.enlace-nav:hover {
+  color: var(--primario);
+}
+
+.boton-acceso {
+  background: transparent;
+  color: var(--primario);
+  border: 2px solid var(--primario);
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 12px;
+  transition: 0.3s;
+}
+
+.boton-acceso:hover {
+  background: var(--primario);
+  color: white;
+}
+
+.btn-salir-link {
+  background: transparent;
+  color: #e74c3c;
+  border: 2px solid #e74c3c;
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 12px;
+  transition: 0.3s;
+}
+
+.btn-salir-link:hover {
+  background: #e74c3c;
+  color: white;
+}
+
+.boton-hamburguesa {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+.boton-hamburguesa i {
+  font-size: 26px;
+  color: var(--texto);
+  transition: color 0.3s ease;
+}
+
+/* --- MENÚ MÓVIL --- */
+.menu-movil-desplegable {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+}
+
+.enlace-nav-movil {
+  padding: 15px 30px;
+  text-decoration: none;
+  color: var(--texto);
+  font-weight: 600;
+  border-bottom: 1px solid #f9f9f9;
+}
+
+.contenedor-boton-movil {
+  padding: 20px;
+  display: flex;
+}
+
+.perfil-nav-movil {
+  padding: 15px 25px; /* 25px a los lados crea el margen que no quieres tocar */
+  border-top: 1px solid #f1f1f1;
+  display: flex;
+  justify-content: center;
+}
+
+.boton-acceso-movil,
+.btn-salir {
+  width: 100%;
+  padding: 15px;
+  border-radius: 12px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.boton-acceso-movil {
+  background: var(--primario);
+  color: white;
+}
+
+.btn-salir {
+  background: #e74c3c;
+  color: white;
+}
+
+/* --- CUERPO DINÁMICO --- */
+.cuerpo-layout {
+  background-color: #faf8f9;
+  padding-top: 20px;
+
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  overscroll-behavior: none;
+}
+
+/* --- PIE DE PÁGINA (FOOTER) --- */
+.pie-pagina {
+  background-color: #f1f2f6;
+  padding: 60px 20px 30px;
+  border-top: 1px solid #e1e1e1;
+}
+
+.footer-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  text-align: center;
+}
+
+.footer-logo {
+  margin-bottom: 10px;
+  letter-spacing: -1px;
+  color: var(--primario);
+  font-weight: 900;
+  font-size: 26px;
+}
+
+.footer-texto {
+  max-width: 250px;
+  margin: 0 auto;
+  color: #7f8c8d;
+  font-size: 14px;
+}
+
+.footer-redes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.red-icono {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: rgb(42, 7, 122);
+  font-size: 18px;
+  transition: 0.3s ease;
+}
+
+.red-icono:hover {
+  color: #c8a96a;
+  transform: scale(1.05);
+}
+
+.footer-copy {
+  max-width: 1200px;
+  font-size: 12px;
+  text-align: center;
+  font-weight: 500;
+  border-top: 1px solid #dcdde1;
+  margin-top: 40px;
+  padding-top: 20px;
+  color: #95a5a6;
+}
+
+/* --- RESPONSIVE ESCRITORIO --- */
+@media (min-width: 769px) {
+  .menu-escritorio {
+    display: flex;
+  }
+  .boton-hamburguesa {
+    display: none;
+  }
+  .menu-movil-desplegable {
+    display: none;
+  }
+
+  .contenedor-ubicacion {
+    flex-direction: row; /* Horizontal en pantallas grandes */
+    text-align: left;
+  }
+
+  .mapa-placeholder {
+    flex: 1.2; /* El mapa ocupa un poco más de espacio */
+    height: 400px;
+  }
+
+  .info-ubicacion {
+    flex: 0.8;
+    text-align: left;
+  }
+
+  .texto-descripcion {
+    margin-left: 0;
+  }
+
+  .modal-caja {
+    padding: 40px;
+  }
+
+  .footer-grid {
+    flex-direction: row; /* 💻 Horizontal */
+    justify-content: space-between;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .footer-texto {
+    margin: 0;
+  }
+
+  .footer-redes {
+    align-items: flex-start; /* 💻 Alineado izquierda */
+  }
+}
