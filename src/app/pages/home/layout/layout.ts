@@ -42,7 +42,7 @@ export class Layout {
   cargarDatosHotel() {
     this.cargandoHotel.set(true);
 
-    this.hotelService.cargarDatoshotel().subscribe({
+    this.hotelService.cargarDatosHotel().subscribe({
       next: (datos) => {
         this.hotel.set(datos);
         this.cargandoHotel.set(false);

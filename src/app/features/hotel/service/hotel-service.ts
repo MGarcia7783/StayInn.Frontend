@@ -13,7 +13,7 @@ export class HotelService {
 
 
   // Cargar información de un hotel
-  cargarDatoshotel(): Observable<IHotel> {
+  cargarDatosHotel(): Observable<IHotel> {
     return this.http.get<IHotel>(`${this.url}`);
   }
 }

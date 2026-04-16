@@ -1,1 +1,94 @@
-<p>lading-page works!</p>
+<!-- HERO SECTION -->
+<section
+  class="hero-portada"
+  [style.background-image]="hotel()?.imagenPrincipal ? 'url(' + hotel()?.imagenPrincipal + ')' : ''"
+>
+  <div class="hero-contenido">
+    @if (cargandoHotel()) {
+      <div class="estado-carga">
+        <div class="spinner"></div>
+        <p>Cargando...</p>
+      </div>
+    } @else {
+      <div class="hero-contenido">
+        <h1 class="hero-titulo">Bienvenido a {{ hotel()?.nombre || 'StayInn Resort' }}</h1>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- SECCIÓN ESPARCIMIENTO -->
+<section id="esparcimiento" class="seccion-gris">
+  <div class="contenedor-limite">
+    <h2 class="titulo-seccion">Áreas de Esparcimiento</h2>
+
+    @if (cargando()) {
+      <div class="estado-carga">
+        <div class="spinner"></div>
+        <p>Preparando su experiencia...</p>
+      </div>
+    } @else {
+      @if (esparcimientos().length > 0) {
+        <div class="cuadricula-esparcimiento">
+          @for (item of esparcimientos(); track item.nombre) {
+            <div class="tarjeta-esparcimiento">
+              <div class="imagen-contenedor">
+                <img [src]="item.imagenUrl" [alt]="item.nombre" class="imagen-card" />
+              </div>
+              <h3 class="nombre-card">{{ item.nombre }}</h3>
+            </div>
+          }
+        </div>
+      } @else {
+        <p class="estado-vacio">No hay áreas disponibles actualmente.</p>
+      }
+    }
+  </div>
+</section>
+
+<!-- SECCIÓN UBICACIÓN CON GOOGLE MAPS REAL -->
+<section id="ubicacion" class="seccion-blanca">
+  <div class="contenedor-ubicacion">
+    <div class="mapa-placeholder">
+      <!-- Cambiamos cargando() por cargarMapa() -->
+      @if (hotel() && cargarMapa()) {
+        <iframe
+          width="100%"
+          height="100%"
+          frameborder="0"
+          style="border: 0; min-height: 400px"
+          [src]="cargarMapa()"
+          allowfullscreen
+        >
+        </iframe>
+      } @else {
+        <div class="estado-carga-mapa">
+          <div class="spinner-pequeno"></div>
+          <p>Localizando hotel...</p>
+        </div>
+      }
+    </div>
+
+    <div class="info-ubicacion">
+      <h2 class="titulo-ubicacion">Nuestra Ubicación</h2>
+      <p class="texto-descripcion"><strong>Dirección:</strong> {{ hotel()?.direccion }}</p>
+      <p class="texto-descripcion">
+        {{ hotel()?.descripcion }}
+      </p>
+      <!-- Botón opcional para abrir en App de Google Maps -->
+      <a
+        [href]="
+          'https://www.google.com/maps/search/?api=1&query=' +
+          hotel()?.latitud +
+          ',' +
+          hotel()?.longitud
+        "
+        target="_blank"
+        rel="noopener noreferrer"
+        class="boton-secundario"
+      >
+        Abrir en Google Maps
+      </a>
+    </div>
+  </div>
+</section>
