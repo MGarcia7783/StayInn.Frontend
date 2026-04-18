@@ -1,59 +1,80 @@
-# Frontend
+# 🏨 StayInn.Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.7.
+**StayInn** es la interfaz web de un sistema de **gestión de reservaciones hoteleras**, desarrollada con **Angular 21**, diseñada para ofrecer una experiencia moderna, dinámica y escalable tanto para clientes como para administradores.
 
-## Development server
+La aplicación permite gestionar reservas, habitaciones, clientes y operaciones hoteleras mediante una arquitectura frontend optimizada, utilizando las nuevas características de Angular como **Signals**, **Standalone Components**, **Ruteo**, **Navegación**, **Lazy Loading**, **Formularios Reactivos** e **Inyección de Dependencias** lo que mejora el rendimiento, la mantenibilidad y la experiencia de usuario.
 
-To start a local development server, run:
+
+## 📄 Descripción Detallada
+
+Este proyecto representa la **capa visual y funcional del sistema StayInn.Api**, encargándose de interactuar con la API backend y brindar una interfaz intuitiva para la administración hotelera.
+
+Entre sus funcionalidades principales se encuentran:
+
+- Visualización de habitaciones disponibles  
+- Gestión de reservaciones  
+- Registro y administración de clientes  
+- Panel administrativo para operaciones hoteleras  
+- Integración con servicios REST del backend  
+
+La aplicación está construida siguiendo buenas prácticas de desarrollo frontend, con una arquitectura modular y escalable basada en:
+
+- **Standalone Components**, para reducir dependencias entre módulos  
+- **Signals**, para manejo reactivo del estado  
+- **Lazy Loading**, para optimizar la carga de módulos y mejorar el rendimiento  
+- **Reactive Forms**, para la gestión robusta de formularios con validaciones  
+- **Dependency Injection**, para desacoplar servicios y mejorar la mantenibilidad  
+- Separación clara entre componentes, servicios y lógica de negocio  
+
+
+## ⭐ Características Principales
+
+- Interfaz moderna para gestión hotelera  
+- Gestión de habitaciones y reservaciones  
+- Administración de clientes  
+- Consumo de API RESTful desarrollada en .NET  
+- Arquitectura basada en **Standalone Components**  
+- Manejo reactivo del estado con **Signals**  
+- Carga diferida de módulos con **Lazy Loading**  
+- Inyección de dependencias para gestión de servicios  
+- Servicios desacoplados para comunicación con backend  
+- Diseño escalable y mantenible  
+- Preparado para integración con autenticación y roles  
+
+
+## 🛠️ Tecnologías Utilizadas
+
+- Angular 21  
+- TypeScript  
+- Signals  
+- Standalone Components  
+- Lazy Loading  
+- Reactive Forms  
+- Dependency Injection  
+- RxJS  
+- HTML5  
+- CSS3  
+- Angular Router  
+- REST API Integration  
+
+
+## 🚀 Empezando
+
+Sigue estas instrucciones para obtener una copia del proyecto en tu máquina local para desarrollo y pruebas.
+
+
+## 📋 Pre-requisitos
+
+Asegúrate de tener instalado:
+
+- Node.js  
+- Angular CLI  
+- Git  
+
+
+## 🛠️ Instalación
+
+📥 Clona el repositorio:
 
 ```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+git clone https://github.com/MGarcia7783/StayInn.Frontend

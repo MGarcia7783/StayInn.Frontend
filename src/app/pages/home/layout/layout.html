@@ -13,10 +13,15 @@
             link.etiqueta
           }}</a>
         }
-      </div>
 
-      <div class="perfil-nav-movil">
-        <button class="boton-acceso-movil">Iniciar Sesión</button>
+        <!--Si no esta autenticado, mostrar el botón del login-->
+        <div class="perfil-nav-movil">
+          @if (authService.estaAutenticado()) {
+            <button (click)="salir()" class="btn-salir">Cerrar Sesión</button>
+          } @else {
+            <button (click)="abrirModal()" class="boton-acceso-movil">Iniciar Sesión</button>
+          }
+        </div>
       </div>
 
       <!--Menu movil / Boton hamburguesa-->
@@ -33,10 +38,19 @@
     @if (esMenuMovil()) {
       <div class="menu-movil-desplegable">
         @for (link of enlaces; track link.etiqueta) {
-          <a (click)="navegar(link.ruta)"class="enlace-nav-movil" style="cursor: pointer">{{
+          <a (click)="navegar(link.ruta)" class="enlace-nav-movil" style="cursor: pointer">{{
             link.etiqueta
           }}</a>
         }
+
+        <!--Sección de autenticación en móvil-->
+        <div class="perfil-nav-movil">
+          @if (authService.estaAutenticado()) {
+            <button (click)="authService.lagout()" class="btn-salir">Cerrar Sesión</button>
+          } @else {
+            <button (click)="abrirModal()" class="boton-acceso-movil">Iniciar Sesión</button>
+          }
+        </div>
       </div>
     }
   </nav>
@@ -67,4 +81,110 @@
       <div class="footer-copy">© 2026 {{ hotel()?.nombre }}. Todos los derechos reservados.</div>
     </footer>
   </main>
+
+  @if (esModal()) {
+    <div class="modal-fondo">
+      <div class="modal-caja">
+        <button class="boton-cerrar" (click)="cerrarModal()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <h2 class="modal-titulo">{{ vistaAuth() === 'login' ? 'INGRESAR' : 'REGISTRO' }}</h2>
+
+        <!--Formulario Login-->
+        @if (vistaAuth() === 'login') {
+          <form [formGroup]="loginForm" (ngSubmit)="enviarLogin()" class="form-auth">
+            <!-- Campo: Email -->
+            <input
+              type="email"
+              formControlName="email"
+              placeholder="Correo electrónico"
+              class="input-auth"
+            />
+
+            @if (isInvalid(loginForm, 'email')) {
+              <small class="error-text">Correo inválido (ejemplo@correo.com)</small>
+            }
+
+            <!-- Campo: password -->
+            <input
+              type="password"
+              formControlName="password"
+              placeholder="Contraseña"
+              class="input-auth"
+            />
+
+            @if (isInvalid(loginForm, 'password')) {
+              <small class="error-text">Mínimo 6 caracteres (Mayús., Minús., Núm. y Símbolo)</small>
+            }
+
+            <button type="submit" [disabled]="loginForm.invalid" class="btn-enviar">
+              Iniciar Sesión
+            </button>
+          </form>
+        }
+
+        <!--Formulario Registro-->
+        @else {
+          <form [formGroup]="registroForm" (ngSubmit)="enviarRegistro()" class="form-auth">
+            <input
+              type="text"
+              formControlName="nombreCompleto"
+              placeholder="Nombre completo"
+              class="input-auth"
+            />
+
+            @if (isInvalid(registroForm, 'nombreCompleto')) {
+              <small class="error-text">Nombre obligatorio (3 a 60 caracteres)</small>
+            }
+
+            <input
+              type="tel"
+              formControlName="phoneNumber"
+              placeholder="Teléfono"
+              class="input-auth"
+            />
+
+            @if (isInvalid(registroForm, 'phoneNumber')) {
+              <small class="error-text">Ingrese un teléfono válido (min. 8 dígitos)</small>
+            }
+
+            <input
+              type="email"
+              formControlName="email"
+              placeholder="Correo electrónico"
+              class="input-auth"
+            />
+
+            @if (isInvalid(registroForm, 'email')) {
+              <small class="error-text">Email inválido (ejemplo@correo.com)</small>
+            }
+
+            <input
+              type="password"
+              formControlName="password"
+              placeholder="Contraseña (mín. 6 caracteres)"
+              class="input-auth"
+            />
+
+            @if (isInvalid(registroForm, 'password')) {
+              <small class="error-text">Mínimo 6 caracteres (Mayús., Minús., Núm. y Símbolo)</small>
+            }
+
+            <button type="submit" [disabled]="registroForm.invalid" class="btn-enviar">
+              Crear Cuenta
+            </button>
+          </form>
+        }
+        <p
+          class="link-cambio"
+          (click)="cambiarVista(vistaAuth() === 'login' ? 'registro' : 'login')"
+        >
+          {{
+            vistaAuth() === 'login' ? '¿No tienes cuenta? Regístrate' : '¿Ya tienes cuenta? Ingresa'
+          }}
+        </p>
+      </div>
+    </div>
+  }
 </div>
