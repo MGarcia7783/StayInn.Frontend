@@ -1,1 +1,128 @@
-<p>Hola soy el dashboard</p>
+<section class="seccion-layout">
+  <div class="contenedor-estandar">
+    <header class="cabecera-pagina" style="text-align: left; margin-bottom: 30px">
+      <h2>Panel de Control</h2>
+    </header>
+
+    @if (cargando()) {
+      <div class="estado-carga"><div class="spinner"></div></div>
+    } @else {
+      <!--1. Métricas clave-->
+      <div class="grid-metricas">
+        <div class="tarjeta-metrica">
+          <div class="icono-metrica azul"><i class="fa-solid fa-bed"></i></div>
+          <div class="info-metrica">
+            <span class="label">Habitaciones</span>
+            <h3 class="valor">{{ datos()?.totalHabitaciones }}</h3>
+          </div>
+        </div>
+        <div class="tarjeta-metrica">
+          <div class="icono-metrica verde"><i class="fa-solid fa-user-check"></i></div>
+          <div class="info-metrica">
+            <span class="label">Ocupación Actual</span>
+            <h3 class="valor">{{ datos()?.habitacionesOcupadas }}</h3>
+          </div>
+        </div>
+        <div class="tarjeta-metrica">
+          <div class="icono-metrica naranja"><i class="fa-solid fa-clock"></i></div>
+          <div class="info-metrica">
+            <span class="label">Pendientes</span>
+            <h3 class="valor">{{ datos()?.reservasPendientes }}</h3>
+          </div>
+        </div>
+        <div class="tarjeta-metrica">
+          <div class="icono-metrica purpura"><i class="fa-solid fa-wallet"></i></div>
+          <div class="info-metrica">
+            <span class="label">Ingresos Mes</span>
+            <h3 class="valor">
+              {{ datos()?.ingresosMesActual | currency: 'USD' : 'symbol' : '1.0-0' }}
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-dashboard-principal">
+        <!--Gráfico de tendencias-->
+        <div class="tarjeta-resort grafico-contenedor">
+          <h3 class="tarjeta-titulo">Tendencias de Reservas (7d)</h3>
+
+          @if (chartOptions; as chart) {
+            <apx-chart
+              [series]="chart.series"
+              [chart]="chart.chart"
+              [xaxis]="chart.xaxis"
+              [stroke]="chart.stroke"
+              [dataLabels]="chart.dataLabels"
+              [colors]="chart.colors"
+              [fill]="chart.fill"
+              [yaxis]="chart.yaxis"
+            >
+            </apx-chart>
+          } @else {
+            <p class="txt-vacio">No hay datos para graficar.</p>
+          }
+        </div>
+
+        <!--Actividad reciente-->
+        <div class="tarjeta-resort">
+          <h3 class="tarjeta-titulo">Actividad Reciente</h3>
+          <div class="lista-actividades">
+            @for (act of datos()?.actividades; track act.descripcion) {
+              <div class="item-actividad">
+                <div class="punto-actividad"></div>
+                <div class="texto-actividad">
+                  <p>{{ act.descripcion }}</p>
+                  <small>{{ act.tiempo }}</small>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!--Llegadas y salidas-->
+      <div class="grid-tablas-cortas">
+        <div class="tarjeta-resort">
+          <h3 class="tarjtea-titulo" style="color: #27ae60">Llegadas Hoy</h3>
+          <table class="tabla-simple">
+            @for (l of datos()?.llegadasHoy; track l.nombreHuesped) {
+              <tr>
+                <td>
+                  <b>Hab. {{ l.numeroHabitacion }}</b>
+                </td>
+                <td>{{ l.nombreHuesped }}</td>
+                <td>
+                  <span class="badge-resort badge-pendiente">{{ l.estado }}</span>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td class="txt-vacio">No hay llegadas programadas.</td>
+              </tr>
+            }
+          </table>
+        </div>
+        <div class="tarjeta-resort">
+          <h3 class="tarjtea-titulo" style="color: #e74c3c">Salidas Hoy</h3>
+          <table class="tabla-simple">
+            @for (l of datos()?.salidasHoy; track l.nombreHuesped) {
+              <tr>
+                <td>
+                  <b>Hab. {{ l.numeroHabitacion }}</b>
+                </td>
+                <td>{{ l.nombreHuesped }}</td>
+                <td>
+                  <span class="badge-resort badge-pendiente">{{ l.estado }}En Curso</span>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td class="txt-vacio">No hay salidas programadas.</td>
+              </tr>
+            }
+          </table>
+        </div>
+      </div>
+    }
+  </div>
+</section>
