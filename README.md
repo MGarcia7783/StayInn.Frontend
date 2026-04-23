@@ -5,7 +5,7 @@
 La aplicación permite gestionar reservas, habitaciones, clientes y operaciones hoteleras mediante una arquitectura frontend optimizada, utilizando las nuevas características de Angular como **Signals**, **Standalone Components**, **Ruteo**, **Navegación**, **Lazy Loading**, **Formularios Reactivos** e **Inyección de Dependencias** lo que mejora el rendimiento, la mantenibilidad y la experiencia de usuario.
 
 
-## 📄 Descripción Detallada
+## 📄 Descripción
 
 Este proyecto representa la **capa visual y funcional del sistema StayInn.Api**, encargándose de interactuar con la API backend y brindar una interfaz intuitiva para la administración hotelera.
 
