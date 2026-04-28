@@ -13,6 +13,11 @@ export const ADMIN_ROUTES: Routes = [
       import('../../../features/dashboard/components/dashboard').then((c) => c.Dashboard),
   },
   {
+    path: 'hotel',
+    loadChildren: () =>
+      import('../../../features/hotel/routes/hotel.routes').then((c) => c.HOTEL_ROUTES),
+  },
+  {
     path: '**',
     redirectTo: 'dashboard',
   },

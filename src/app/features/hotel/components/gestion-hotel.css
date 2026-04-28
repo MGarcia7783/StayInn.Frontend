@@ -1,0 +1,79 @@
+.rejilla-ajustada {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 50px;
+  text-align: left;
+  align-items: start;
+}
+
+.columna-formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fila-doble {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.input-auth {
+  resize: none;
+  line-height: 1.5;
+}
+
+/* --- SECCIÓN DE FOTO Y BOTÓN --- */
+.columna-foto {
+  display: flex;
+  flex-direction: column;
+}
+
+.marco-subida {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background-color: #fcfcfc;
+  border: 2px dashed #e2e8f0;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: 0.3s;
+  margin-bottom: 25px;
+}
+
+.foto-render {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.btn-posicion-final {
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  box-shadow: 0 10px 20px rgba(61, 57, 175, 0.15);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 1024px) {
+  .rejilla-ajustada {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  /* La imagen y el botón bajan automáticamente por orden de HTML */
+  .columna-foto {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fila-doble {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}

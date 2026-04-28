@@ -9,3 +9,4 @@ export interface IHotel {
   longitud: number;
   imagenPrincipal: string;
 }
+

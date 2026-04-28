@@ -1,0 +1,135 @@
+<section class="seccion-layout">
+  <div class="contenedor-estandar">
+    <header class="cabecera-pagina">
+      <h2>Información del Hotel</h2>
+      <p>Actualice los datos de contacto, ubicación e imagen principal de su establecimiento.</p>
+    </header>
+
+    @if (cargando()) {
+      <div class="estado-carga"><div class="spinner"></div></div>
+    } @else {
+      <div class="tarjeta-resort">
+        <form [formGroup]="formHotel" (ngSubmit)="guardarCambios()" class="rejilla-ajustada">
+          <!--COLUMNA IZQUIERDA: FORMULARIO-->
+          <div class="columna-formulario">
+            <div class="campo">
+              <label>Nombrea Comercial</label>
+              <input
+                type="text"
+                formControlName="nombre"
+                class="input-auth"
+                placeholder="Nombre del hotel"
+              />
+
+              @if (isInvalid(formHotel, 'nombre')) {
+                <small class="error-text">el nombre es obligatorio (máx. 70 caracteres)</small>
+              }
+            </div>
+
+            <div class="fila-doble">
+              <div class="campo">
+                <label>Correo de Contacto</label>
+                <input type="email" formControlName="email" class="input-auth" />
+
+                @if (isInvalid(formHotel, 'email')) {
+                  <small class="error-texto"
+                    >Ingrese un correo electrónico válido (ejemplo@corrego.com)</small
+                  >
+                }
+              </div>
+              <div class="campo">
+                <label>Teléfono</label>
+                <input type="text" formControlName="telefono" class="input-auth" />
+
+                @if (isInvalid(formHotel, 'telefono')) {
+                  <small class="error-texto">Mínimo 8 dígitos permitidos.</small>
+                }
+              </div>
+            </div>
+
+            <div class="campo">
+              <label>Descripción para Clientes</label>
+              <textarea formControlName="descripcion" rows="6" class="input-auth"></textarea>
+
+              @if (isInvalid(formHotel, 'descripcion')) {
+                <small class="error-texto"
+                  >La descripción es obligatoria (máx. 500 caracteres.)</small
+                >
+              }
+            </div>
+
+            <div class="campo">
+              <label>Dirección Exacta</label>
+              <textarea formControlName="direccion" rows="2" class="input-auth"></textarea>
+
+              @if (isInvalid(formHotel, 'direccion')) {
+                <small class="error-texto"
+                  >La dirección es obligatoria (máx. 250 caracteres.)</small
+                >
+              }
+            </div>
+
+            <div class="fila-doble">
+              <div class="campo">
+                <label>Latitud (GPS)</label>
+                <input type="number" formControlName="latitud" class="input-auth" />
+
+                @if (isInvalid(formHotel, 'latitud')) {
+                  <small class="error-texto">Coordenada requerida (-90 a 90)</small>
+                }
+              </div>
+              <div class="campo">
+                <label>Longitud (GPS)</label>
+                <input type="number" formControlName="longitud" class="input-auth" />
+
+                @if (isInvalid(formHotel, 'longitud')) {
+                  <small class="error-texto">Coordenada requerida (-180 a 180)</small>
+                }
+              </div>
+            </div>
+          </div>
+
+          <!--COLUMNA DERECHA: IMAGEN Y BOTON GUARDAR-->
+          <div class="columna-foto">
+            <div class="campo">
+              <label>Foto de Portada</label>
+              <div class="marco-subida" (click)="inputFoto.click()">
+                @if (vistaPrevia()) {
+                  <img [src]="vistaPrevia()" alt="Portada" class="foto-render" />
+                  <div class="capa-cambio"><span>Cambiar Imagen</span></div>
+                } @else {
+                  <div class="vacio-foto">
+                    <i class="fa-solid fa-image"></i>
+                    <span>Subir imagen</span>
+                  </div>
+                }
+              </div>
+              <input
+                #inputFoto
+                type="file"
+                (change)="seleccionarArchivo($event)"
+                accept="image/*"
+                style="display: none"
+              />
+
+              @if (isInvalid(formHotel, 'imagenPrincipal')) {
+                <small class="error-text">
+                  La imagen de protada es obligatoria para el registro</small
+                >
+              }
+            </div>
+
+            <button
+              type="submit"
+              [disabled]="formHotel.invalid"
+              class="btn-resort btn-resort-primario btn-posicion-final"
+            >
+              <i class="fa-solid fa-floppy-disk"></i>
+              {{ hotel() ? 'Guardar Cambios' : 'Registrar Hotel' }}
+            </button>
+          </div>
+        </form>
+      </div>
+    }
+  </div>
+</section>
