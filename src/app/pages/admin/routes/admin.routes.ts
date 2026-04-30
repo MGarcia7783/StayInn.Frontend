@@ -18,6 +18,13 @@ export const ADMIN_ROUTES: Routes = [
       import('../../../features/hotel/routes/hotel.routes').then((c) => c.HOTEL_ROUTES),
   },
   {
+    path: 'habitaciones',
+    loadChildren: () =>
+      import('../../../features/habitacion/routes/habitacion.routes').then(
+        (c) => c.HABITACION_ROUTES,
+      ),
+  },
+  {
     path: '**',
     redirectTo: 'dashboard',
   },

@@ -1,0 +1,180 @@
+<section class="seccion-layout">
+  <div class="contenedor-gestion">
+    <header class="cabecera-seccion">
+      <div class="info-titulo">
+        <h2 class="titulo-admin">Gestión de Habitaciones</h2>
+        <p class="subtitulo-admin">
+          Administre el inventario, precios y capacidad de habitaciones.
+        </p>
+      </div>
+    </header>
+
+    <!--BARRA DE ACCIONES (buscador + botón)-->
+    <div class="barra-acciones">
+      <div class="contenedor-busqueda">
+        <i class="fa-solid fa-magnifying-glass icono-busqueda"></i>
+        <input
+          type="text"
+          placeholder="Buscar por número, descripción..."
+          class="input-busqueda"
+          (input)="alBuscar($event)"
+        />
+      </div>
+
+      <button class="btn-resort btn-resort-primario" (click)="abrirModalNuevo()">
+        <i class="fa-solid fa-plus"></i>
+        <span class="texto-boton"> Nueva Habitación</span>
+      </button>
+    </div>
+
+    @if (cargando()) {
+      <div class="estado-carga"><div class="spinner"></div></div>
+    } @else {
+      <div class="tabla-contendor">
+        <table class="tabla-resort">
+          <thead>
+            <tr>
+              <th>Número</th>
+              <th>Descripción</th>
+              <th>Capacidad</th>
+              <th>Precio</th>
+              <th>Estado</th>
+              <th class="txt-centro">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (habitacion of habitaciones(); track habitacion.id) {
+              <tr>
+                <td class="txt-negrita">Hab. {{ habitacion.numero }}</td>
+                <td class="columna-descripcion">
+                  <span class="texto-truncado">{{ habitacion.descripcion }}</span>
+                </td>
+                <td>{{ habitacion.capacidadMax }} personas</td>
+                <td>{{ habitacion.precioNoche | currency: 'USD' : 'symbol' : '1.2-2' }}</td>
+                <td>
+                  <span
+                    class="badhe-resort"
+                    [ngClass]="'badge-' + (habitacion.estaDisponible ? 'confirmada' : 'cancelada')"
+                  >
+                    {{ habitacion.estaDisponible ? 'Disponible' : 'Ocupada' }}
+                  </span>
+                </td>
+                <td class="acciones-celda">
+                  <button class="btn-accion btn-editar" (click)="editarHabitacion(habitacion)">
+                    <i class="fa-solid fa-pencil"></i>
+                  </button>
+                  <button
+                    class="btn-accion btn-eliminar"
+                    (click)="eliminarHabitacion(habitacion.id)"
+                  >
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="6" class="tabla-vacia">
+                  @if (criterioBusqueda()) {
+                    No se encontraron habitaciones que coincidan con "{{ criterioBusqueda() }}"
+                  } @else {
+                    No hay habitaciones registradas en el sistema.
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <!--Paginación-->
+      <nav class="paginacion-estandar">
+        <button
+          class="btn-pag"
+          [disabled]="paginaActual() === 1"
+          (click)="cambiarPagina(paginaActual() - 1)"
+        >
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <span class="info-pag"
+          >Página <b>{{ paginaActual() }}</b> de {{ totalPaginas() }}</span
+        >
+        <button
+          class="btn-pag"
+          [disabled]="paginaActual() >= totalPaginas()"
+          (click)="cambiarPagina(paginaActual() + 1)"
+        >
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </nav>
+    }
+  </div>
+
+  <!--MODAL PARA AGREGAR Y EDITAR-->
+  @if (modalAbierto()) {
+    <div class="modal-fondo">
+      <div class="modal-caja">
+        <button class="boton-cerrar" (click)="cerrarModal()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <h2 class="modal-titulo">
+          {{ habitacionSeleccionada() ? 'Editar Habitación' : 'Nueva Habitación' }}
+        </h2>
+
+        <form [formGroup]="formHabitacion" (ngSubmit)="guardar()" class="form-auth">
+          <!--Campo: Número-->
+          <div class="campo">
+            <label>Número de Habitación</label>
+            <input type="text" formControlName="numero" placeholder="Ej: 001" class="input-auth" />
+
+            @if (isInvalid(formHabitacion, 'numero')) {
+              <small class="error-text">El número es obligatorio (máx. 10 caracteres)</small>
+            }
+          </div>
+
+          <!--Campo: Capacidad máxima-->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px">
+            <div class="campo">
+              <label>Capacidad Máx</label>
+              <input type="number" formControlName="capacidadMax" class="input-auth" />
+
+              @if (isInvalid(formHabitacion, 'capacidadMax')) {
+                <small class="error-text">Mínimo 1 persona</small>
+              }
+            </div>
+
+            <!--Campo: Precio-->
+            <div class="campo">
+              <label>Precio / Noche</label>
+              <input type="number" formControlName="precioNoche" class="input-auth" />
+
+              @if (isInvalid(formHabitacion, 'precioNoche')) {
+                <small class="error-text">Ingrese un precio válido</small>
+              }
+            </div>
+          </div>
+
+          <!--Campo: Descripción-->
+          <div class="campo">
+            <label>Descripción</label>
+            <textarea
+              formControlName="descripcion"
+              rows="4"
+              class="input-auth"
+              style="resize: none"
+              placeholder="Detalles de la habitación.."
+            ></textarea>
+
+            @if (isInvalid(formHabitacion, 'descripcion')) {
+              <small class="error-text">La descripción es obligatoria (máx. 500 caracteres)</small>
+            }
+          </div>
+
+          <button type="submit" [disabled]="formHabitacion.invalid" class="btn-enviar">
+            {{ habitacionSeleccionada() ? 'Guardar Cambios' : 'Registrar Habitación' }}
+          </button>
+        </form>
+      </div>
+    </div>
+  }
+</section>

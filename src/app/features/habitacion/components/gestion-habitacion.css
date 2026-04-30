@@ -1,0 +1,56 @@
+.contenedor-gestion {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.cabecera-seccion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.titulo-admin {
+  font-size: 24px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0;
+}
+.subtitulo-admin {
+  color: #64748b;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Estilos para el modal */
+textarea.input-auth {
+  padding-top: 12px;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .barra-acciones {
+    flex-direction: column;
+    align-items: stretch; /* Botón e input ocupan todo el ancho */
+  }
+
+  .contenedor-busqueda {
+    max-width: 100%;
+  }
+
+  .btn-resort-primario {
+    justify-content: center; /* Centra el texto e icono en el botón ancho */
+  }
+}
+
+.paginacion-estandar {
+  margin-top: auto;
+}
+
+@media (max-width: 480px) {
+  .texto-boton {
+    display: inline; /* Mantener texto en móvil o ocultarlo si prefieres solo el icono */
+  }
+}
