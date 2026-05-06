@@ -1,0 +1,29 @@
+.contenedor-gestion {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.previsualizacion-tabla {
+  width: 80px;
+  height: 50px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #eee;
+}
+
+.previsualizacion-tabla img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .barra-acciones {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .contenedor-busqueda {
+    max-width: 100%;
+  }
+}

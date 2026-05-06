@@ -25,6 +25,13 @@ export const ADMIN_ROUTES: Routes = [
       ),
   },
   {
+    path: 'area-esparcimiento',
+    loadChildren: () =>
+      import('../../../features/esparcimiento/routes/esparcimiento.routes').then(
+        (c) => c.ESPARCIMIENTO_ROUTES,
+      ),
+  },
+  {
     path: '**',
     redirectTo: 'dashboard',
   },

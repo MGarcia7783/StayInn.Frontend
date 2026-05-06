@@ -1,0 +1,76 @@
+<section class="seccion-layout">
+  <div class="contenedor-gestion">
+    <header class="cabecera-seccion">
+      <div class="info-titulo">
+        <h2 class="titulo-admin">Áreas de Esparcimiento</h2>
+        <p class="subtitulo-admin">Administre los espacios recreativos del hotel.</p>
+      </div>
+    </header>
+
+    <!--BARRA DE ACCIONES (buscador + botón)-->
+    <div class="barra-acciones">
+      <div class="contenedor-busqueda">
+        <i class="fa-solid fa-magnifying-glass icono-busqueda"></i>
+        <input
+          type="text"
+          placeholder="Buscar por nombre..."
+          class="input-busqueda"
+          (input)="alBuscar($event)"
+        />
+      </div>
+
+      <button class="btn-resort btn-resort-primario" (click)="irANuevo()">
+        <i class="fa-solid fa-plus"></i>
+        <span class="texto-boton"> Nuevo Esparcimiento</span>
+      </button>
+    </div>
+
+    @if (cargando()) {
+      <div class="estado-carga"><div class="spinner"></div></div>
+    } @else {
+      <div class="tabla-contenedor">
+        <table class="tabla-resort">
+          <thead>
+            <tr>
+              <th>Imagen</th>
+              <th>Descripción</th>
+              <th class="txt-centro">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (esparcimiento of esparciemientos(); track esparcimiento.id) {
+              <tr>
+                <td>
+                  <div class="previsualizacion-tabla">
+                    <img [src]="esparcimiento.imagenUrl" />
+                  </div>
+                </td>
+                <td>{{ esparcimiento.nombre }}</td>
+                <td class="acciones-celda">
+                  <button class="btn-accion btn-editar" (click)="irAEditar(esparcimiento.id)">
+                    <i class="fa-solid fa-pencil"></i>
+                  </button>
+                  <button class="btn-accion btn-eliminar" (click)="eliminar(esparcimiento.id)">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="3" class="tabla-vacia">
+                  @if (criterioBusqueda()) {
+                    No se encontraron áreas de esparcimiento que coincidan con "{{
+                      criterioBusqueda()
+                    }}"
+                  } @else {
+                    No hay áreas de esparcimiento registradas en el sistema.
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+</section>
