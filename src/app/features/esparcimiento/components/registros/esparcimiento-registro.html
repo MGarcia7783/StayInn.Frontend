@@ -1,0 +1,70 @@
+<section class="seccion-layout">
+  <div class="contenedor-estandar">
+    <header class="cabecera-pagina">
+      <div class="navegacion-atras">
+        <button class="btn-regresar-simple" (click)="regresar()">
+          <i class="fa-solid fa-arrow-left"></i> Volver al listado
+        </button>
+      </div>
+      <h2>{{ esEdicion() ? 'Editar Área de Esparcimiento' : 'Nueva Área de Esparcimiento' }}</h2>
+      <p>Configure el nombre y la imagen que se mostrará en la página principal.</p>
+    </header>
+
+    <div class="tarjeta-resort">
+      <form [formGroup]="formEsparcimiento" (ngSubmit)="guardar()" class="formulario-grid">
+        <!--PARET IZQUIERDA: DATOS-->
+        <div class="columna-datos">
+          <div class="campo">
+            <label>Nombre del Esparcimiento</label>
+            <input
+              type="text"
+              formControlName="nombre"
+              class="input-auth"
+              placeholder="Ej: Piscina Olímpica"
+            />
+            @if (isInvalid(formEsparcimiento, 'nombre')) {
+              <small class="error-text">El nombre es obligatorio (máx. 50 carac.)</small>
+            }
+          </div>
+
+          <div class="acciones-finales">
+            <button
+              type="submit"
+              [disabled]="formEsparcimiento.invalid"
+              class="btn-resort btn-resort-primario btn-full"
+            >
+              <i class="fa-solid fa-floppy-disk"></i>
+              {{ esEdicion() ? 'Guardar Cambios' : 'Registrar Esparcimiento' }}
+            </button>
+          </div>
+        </div>
+
+        <!--PARTE DERECHA: IMAGEN-->
+        <div class="columna-imagen">
+          <label class="etiqueta-foto">Imagen del Esparcimiento</label>
+          <div class="marco-foto" (click)="inputArchivo.click()">
+            @if (vistaPrevia()) {
+              <img [src]="vistaPrevia()" alt="Preview" class="imagen-render" />
+              <div class="overlay-foto"><span>Cambiar imagen</span></div>
+            } @else {
+              <div class="vacio-foto">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <span>Seleccionar archico</span>
+              </div>
+            }
+          </div>
+          <input
+            #inputArchivo
+            type="file"
+            (change)="seleccionarArchivo($event)"
+            accept="image/*"
+            style="display: none"
+          />
+          @if (isInvalid(formEsparcimiento, 'imagenUrl')) {
+            <small class="error-text">La imagen es obligatoria para nuevos registros</small>
+          }
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

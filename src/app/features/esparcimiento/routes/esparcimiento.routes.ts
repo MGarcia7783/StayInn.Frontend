@@ -9,6 +9,20 @@ export const ESPARCIMIENTO_ROUTES: Routes = [
       ),
   },
   {
+    path: 'nuevo',
+    loadComponent: () =>
+      import('../../esparcimiento/components/registros/esparcimiento-registro').then(
+        (c) => c.EsparcimientoRegistro,
+      ),
+  },
+  {
+    path: 'editar/:id',
+    loadComponent: () =>
+      import('../../esparcimiento/components/registros/esparcimiento-registro').then(
+        (c) => c.EsparcimientoRegistro,
+      ),
+  },
+  {
     path: '',
     redirectTo: 'listado',
     pathMatch: 'full',

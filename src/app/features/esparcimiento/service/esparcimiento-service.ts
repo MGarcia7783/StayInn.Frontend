@@ -28,6 +28,21 @@ export class EsparcimientoService {
     return this.http.get<IAreaEsparcimiento>(`${this.url}/buscar`, { params });
   }
 
+  // Obtener registro por Id
+  obtenerPorId(id: number): Observable<IAreaEsparcimiento> {
+    return this.http.get<IAreaEsparcimiento>(`${this.url}/${id}`);
+  }
+
+  // Crear registro (FromData por la Imagen)
+  crear(datos: FormData): Observable<IAreaEsparcimiento> {
+    return this.http.post<IAreaEsparcimiento>(this.url, datos);
+  }
+
+  // Actualizar regstro
+  actualizar(id: number, datos: FormData): Observable<void> {
+    return this.http.put<void>(`${this.url}/${id}`, datos);
+  }
+
   // Eliminar regstro
   eliminarArea(id: number): Observable<void> {
     return this.http.delete<void>(`${this.url}/${id}`);

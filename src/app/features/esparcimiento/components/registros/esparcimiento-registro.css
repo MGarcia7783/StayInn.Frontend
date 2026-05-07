@@ -1,0 +1,99 @@
+.formulario-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 40px;
+  text-align: left;
+  align-items: start;
+}
+
+.navegacion-atras {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.btn-regresar-simple {
+  background: none;
+  border: none;
+  color: var(--primario);
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.etiqueta-foto {
+  font-size: 15px;
+  font-weight: 600;
+  padding-left: 2px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* MARCO PARA SUBIR IMAGEN */
+.marco-foto {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #f8fafc;
+  border: 2px dashed #e2e8f0;
+  border-radius: 15px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: 0.3s;
+}
+
+.marco-foto:hover {
+  border-color: var(--primario);
+  background: #f1f5f9;
+}
+
+.imagen-render {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay-foto {
+  position: absolute;
+  inset: 0;
+  background: rgba(61, 57, 175, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: 0.3s;
+  color: white;
+  font-weight: 700;
+}
+
+.marco-foto:hover .overlay-foto {
+  opacity: 1;
+}
+
+.vacio-foto {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  gap: 10px;
+}
+
+.btn-full {
+  width: 100%;
+  padding: 16px;
+  margin-top: 20px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .formulario-grid {
+    grid-template-columns: 1fr;
+  }
+  .columna-imagen {
+    order: -1;
+  } /* Imagen arriba en móviles */
+}
