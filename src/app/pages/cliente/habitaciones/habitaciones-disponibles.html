@@ -1,0 +1,53 @@
+<section class="seccion-layout">
+  <div class="contenedor-estandar">
+    <header class="cabecera-pagina">
+      <h2>Nuestras Habitaciones</h2>
+      <p>Descubra el equilibrio entre lujo y descanso en nuestras exclusivas habitaciones.</p>
+    </header>
+
+    @if (cargando()) {
+      <div class="estado-carga"><div class="spinner"></div></div>
+    } @else {
+      <div class="grid-dinamico">
+        @for (room of habitacionesDisponibles(); track room.id) {
+          <article class="tarjeta-resort">
+            <div class="tarjeta-header">
+              <h3 class="tarjeta-titulo">Hab. {{ room.numero }}</h3>
+              <span class="badge-resort badge-info">Máx. {{ room.capacidadMax }} pers</span>
+            </div>
+
+            <p class="room-desc">{{ room.descripcion }}</p>
+
+            <div class="tarjeta-footer">
+              <div class="room-precio">
+                <b>{{ room.precioNoche | number: '1.2-2' }}</b>
+                <span> / dia</span>
+              </div>
+              <button class="btn-resort btn-resort-primario">Reservar Ahora</button>
+            </div>
+          </article>
+        }
+      </div>
+
+      <nav class="paginacion-estandar">
+        <button
+          class="btn-pag"
+          [disabled]="paginaActual() === 1"
+          (click)="cambiarPagina(paginaActual() - 1)"
+        >
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <span class="info-pag"
+          >Página <b>{{ paginaActual() }} de {{ totalPaginas() }}</b></span
+        >
+        <button
+          class="btn-pag"
+          [disabled]="paginaActual() >= totalPaginas()"
+          (click)="cambiarPagina(paginaActual() + 1)"
+        >
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </nav>
+    }
+  </div>
+</section>

@@ -15,6 +15,13 @@ export const routes: Routes = [
         pathMatch: 'full',
       },
       {
+        path: 'habitaciones-disponibles',
+        loadComponent: () =>
+          import('./pages/cliente/habitaciones/habitaciones-disponibles').then(
+            (c) => c.HabitacionesDisponibles,
+          ),
+      },
+      {
         path: 'inicio',
         loadComponent: () => import('./pages/home/landing/lading-page').then((c) => c.LadingPage),
       },
@@ -23,8 +30,7 @@ export const routes: Routes = [
   // Bloque 2: Experienca de administración
   {
     path: 'admin',
-    loadComponent: () =>
-      import('./pages/admin/layout/layout-admin').then((c) => c.LayoutAdmin),
+    loadComponent: () => import('./pages/admin/layout/layout-admin').then((c) => c.LayoutAdmin),
     canActivate: [AuthGuard],
     children: ADMIN_ROUTES,
   },

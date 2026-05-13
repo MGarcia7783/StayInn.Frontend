@@ -1,0 +1,26 @@
+.room-desc {
+  font-size: 14px;
+  color: #636e72;
+  line-height: 1.7;
+  margin-bottom: 30px;
+  text-align: justify;
+}
+
+.room-precio b {
+  font-size: 24px;
+  color: var(--texto);
+  letter-spacing: -1px;
+}
+
+.room-precio span {
+  font-size: 20px;
+  color: #95a5a6;
+}
+
+@media (max-width: 480px) {
+  .room-footer {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+}

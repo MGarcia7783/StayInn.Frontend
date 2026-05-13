@@ -12,6 +12,18 @@ export class HabitacionService {
   private http = inject(HttpClient);
   private url = `${environment.API_URL}/habitaciones`;
 
+  // Listar habitaciones disponibles
+  habitacionesDisponibles(
+    pagina: number = 1,
+    tamanoPagina: number = 10,
+  ): Observable<IRespuestaHabitaciones> {
+    const params = new HttpParams()
+      .set('pagina', pagina.toString())
+      .set('tamanoPagina', tamanoPagina.toString());
+
+    return this.http.get<IRespuestaHabitaciones>(`${this.url}/disponibles`, { params });
+  }
+
   // Listar todas las habitaciobes
   obtenerHabitaciones(
     pagina: number = 1,
