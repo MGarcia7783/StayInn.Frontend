@@ -23,7 +23,9 @@
                 <b>{{ room.precioNoche | number: '1.2-2' }}</b>
                 <span> / dia</span>
               </div>
-              <button class="btn-resort btn-resort-primario">Reservar Ahora</button>
+              <button class="btn-resort btn-resort-primario" (click)="abrirReserva(room)">
+                Reservar Ahora
+              </button>
             </div>
           </article>
         }
@@ -50,4 +52,12 @@
       </nav>
     }
   </div>
+  @if (modalReserva()) {
+    <app-reservacion-registro
+      [habitacion]="habitacionSeleccionada()!"
+      (alCerrar)="cerrarModal()"
+      (alExito)="reservacionExitosa()"
+    >
+    </app-reservacion-registro>
+  }
 </section>

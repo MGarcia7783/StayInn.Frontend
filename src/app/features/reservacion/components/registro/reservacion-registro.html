@@ -1,0 +1,28 @@
+<div class="modal-fondo">
+  <div class="modal-caja">
+    <button class="boton-cerrar" (click)="cerrar()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <h2 class="modal-titulo">Nueva Reservación</h2>
+    <p class="cabecera-pagina" style="margin-bottom: 25px; font-size: 14px; font-weight: bold">
+      Habitación {{ habitacion().numero }}
+    </p>
+
+    <form [formGroup]="reservaForm" (ngSubmit)="confirmaReservacion()" class="form-auth">
+      <div class="campo">
+        <label>Fecha de Entrada</label>
+        <input type="date" formControlName="fechaEntrada" class="input-auth" />
+      </div>
+
+      <div class="campo">
+        <label>Fecha de Salida</label>
+        <input type="date" formControlName="fechaSalida" class="input-auth" />
+      </div>
+
+      <button type="submit" [disabled]="reservaForm.invalid" class="btn-enviar">
+        Realizar Reservación
+      </button>
+    </form>
+  </div>
+</div>
